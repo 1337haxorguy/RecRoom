@@ -23,3 +23,40 @@ a {
   text-decoration: none;
   background-color: none;
 }
+
+.thats-so-true-gracie-abrams-wrapper {
+  border-radius: 100px;
+  background-color: #000;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 8px;
+}
+
+.recroommesophdelrosario {
+  position: relative;
+  letter-spacing: -0.03em;
+}
+
+
+.frame-parent {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 7px;
+    font-size: 10.86px;
+    color: #fff;
+    font-family: 'PP Neue Montreal';
+}
+
+.overview {
+  align-self: stretch;
+  position: relative;
+  line-height: 17.52px;
+}
