@@ -18,3 +18,8 @@
   cursor: pointer;              /* Pointer cursor on hover */
   transition: background-color 0.3s; /* Smooth color change on hover */
 }
+
+a {
+  text-decoration: none;
+  background-color: none;
+}
