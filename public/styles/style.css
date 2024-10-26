@@ -1,4 +1,20 @@
 .qsAndCategories {
-  font-size: 70px;
+  font-size: 60px;
   text-align: center;
+}
+
+.fa-comment {
+  font-size:50px;
+}
+
+.introButton {
+  margin-top: 100px;
+  padding: 10px 20px;           /* Space around the text */
+  background-color: #4CAF50;    /* Button color */
+  color: white;                 /* Text color */
+  border: none;                 /* Remove default border */
+  border-radius: 25px;          /* Rounds the button */
+  font-size: 16px;              /* Font size */
+  cursor: pointer;              /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth color change on hover */
 }
