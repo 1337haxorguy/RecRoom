@@ -1,5 +1,4 @@
 // version for shows
-//test5: make it work for movies
 
 
 const prompt = require('prompt-sync')();
