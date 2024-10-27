@@ -368,7 +368,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const text = recommendationItem.querySelector('.unchecked').textContent;
                 const selectedItems = categorySelections.get(category);
                 
-                if (selectedItems.size < 8) {
+                if (selectedItems.size < 5) {
                     selectedItems.add(text);
                     updateSelectedDisplay();
                     
@@ -378,7 +378,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         JSON.stringify([...selectedItems])
                     );
                 } else {
-                    alert('Maximum 8 items can be selected');
+                    alert('Maximum 5 items can be selected');
                 }
             }
         });
