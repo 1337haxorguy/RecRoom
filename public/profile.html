@@ -58,12 +58,15 @@
       			<div class="image">
         				<div class="friends">Friends</div>
       			</div>
-      			<div class="image1">
-        				<div class="cobra-kai">Cobra Kai</div>
-      			</div>
-      			<div class="image1">
-        				<div class="queen-of-the">Queen of the South</div>
-      			</div>
+                <div class="image1-wrapper">
+                    <div class="image1">
+                        <div class="cobra-kai">Cobra Kai</div>
+                </div>
+                <div class="image1">
+                        <div class="queen-of-the">Queen of the South</div>
+                </div>
+
+                </div>
       			<div class="more-tv-shows-parent">
         				<div class="more-tv-shows">More TV shows</div>
         				<div class="thats-so-true-gracie-abrams-wrapper">
@@ -118,15 +121,19 @@
     		</div>
     		<div class="movies-parent">
       			<div class="songs">Movies</div>
-      			<div class="image">
-        				<div class="friends">La La Land</div>
-      			</div>
-      			<div class="image1">
+
+                <div class="image1">
         				<div class="solo-dates">John Wick</div>
       			</div>
-      			<div class="image1">
+                <div>
+                <div class="image1">
         				<div class="apt">Tangled</div>
-      			</div>
+                </div>
+                <div class="image">
+                    <div class="friends">La La Land</div>
+              </div >
+
+                </div>
       			<div class="more-tv-shows-parent">
         				<div class="more-tv-shows">More Movies</div>
         				<div class="thats-so-true-gracie-abrams-wrapper">
@@ -156,47 +163,117 @@
   	</div>
   	
   	<script>
-        document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
+    // Function to get background style with cover image
+    function getBackgroundStyle(href) {
+        console.log(`Applying background with href: ${href}`);
+
+    return `
+        background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${href});
+        background-size: cover;
+        background-position: center;
+        min-height: 150px;
+        position: relative;
+        border-radius: 8px;
+        overflow: hidden;
+
+    `;
+}
+
+
+    // Function to create overlay div for text
+    function createTextOverlay(text, href) {
+    const overlay = `
+        <div class="friends text-truncate" style="
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            z-index: 2;
+        ">${text}</div>
+        <div style="
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(transparent 50%, rgba(0,0,0,0.7));
+            z-index: 1;
+        "></div>
+    `;
+    return overlay;
+}
+
+    async function getCoverImageTV(show) {
+        const response = await fetch('/api/getCoverImageTV', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ input: show })
+        });
+        const data = await response.json();
+        return data; // Assuming the first element contains the image URL
+    }
+
+    async function getCoverImageMovie(movie) {
+        const response = await fetch('/api/getCoverImageMovie', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ input: movie })
+        });
+        const data = await response.json();
+        return data; // Assuming the first element contains the image URL
+    }
+
+
     // Function to load selections from localStorage
-    function loadSelections() {
+    async function loadSelections() {
         const tvShows = JSON.parse(localStorage.getItem('selected_tv') || '[]');
         const movies = JSON.parse(localStorage.getItem('selected_movies') || '[]');
         
-        updateTVShowsSection(tvShows);
-        updateMoviesSection(movies);
+        await updateTVShowsSection(tvShows);
+        await updateMoviesSection(movies);
     }
 
     // Function to update TV Shows section
-    function updateTVShowsSection(shows) {
+    async function updateTVShowsSection(shows) {
         const tvSection = document.querySelector('.tv-shows-parent');
         if (!tvSection) return;
 
-        // Clear existing featured shows (first 3 slots)
+        // Clear existing featured shows
         const existingShows = tvSection.querySelectorAll('.image, .image1');
         existingShows.forEach(show => show.remove());
 
         // Update featured shows (up to first 3)
         const featuredShows = shows.slice(0, 3);
-        featuredShows.forEach((show, index) => {
+        for (let i = 0; i < featuredShows.length; i++) {
+            const show = featuredShows[i];
             const showDiv = document.createElement('div');
-            showDiv.className = index === 0 ? 'image' : 'image1';
-            showDiv.innerHTML = `<div class="friends">${show}</div>`;
+            showDiv.className = i === 0 ? 'image' : 'image1';
             
-            // Insert after the "TV Shows" heading
+            try {
+                const href = await getCoverImageTV(show);
+                showDiv.style.cssText = getBackgroundStyle(href);
+                showDiv.innerHTML = createTextOverlay(show);
+            } catch (error) {
+                console.error(`Error loading cover for ${show}:`, error);
+                showDiv.innerHTML = `<div class="friends">${show}</div>`;
+            }
+            
             const tvShowsHeading = tvSection.querySelector('.tv-shows');
             tvShowsHeading.parentNode.insertBefore(showDiv, tvShowsHeading.nextSibling);
-        });
+        }
 
         // Update "More TV shows" section
         const moreTVShows = shows.slice(3);
         const moreSection = tvSection.querySelector('.more-tv-shows-parent');
         if (moreSection) {
-            // Clear existing items except the heading
             const heading = moreSection.querySelector('.more-tv-shows');
             moreSection.innerHTML = '';
             moreSection.appendChild(heading);
 
-            // Add remaining shows
             moreTVShows.forEach(show => {
                 const showDiv = document.createElement('div');
                 showDiv.className = 'thats-so-true-gracie-abrams-wrapper';
@@ -207,36 +284,42 @@
     }
 
     // Function to update Movies section
-    function updateMoviesSection(movies) {
+    async function updateMoviesSection(movies) {
         const movieSection = document.querySelector('.movies-parent');
         if (!movieSection) return;
 
-        // Clear existing featured movies (first 3 slots)
+        // Clear existing featured movies
         const existingMovies = movieSection.querySelectorAll('.image, .image1');
         existingMovies.forEach(movie => movie.remove());
 
         // Update featured movies (up to first 3)
         const featuredMovies = movies.slice(0, 3);
-        featuredMovies.forEach((movie, index) => {
+        for (let i = 0; i < featuredMovies.length; i++) {
+            const movie = featuredMovies[i];
             const movieDiv = document.createElement('div');
-            movieDiv.className = index === 0 ? 'image' : 'image1';
-            movieDiv.innerHTML = `<div class="${index === 0 ? 'friends' : 'solo-dates'}">${movie}</div>`;
+            movieDiv.className = i === 0 ? 'image' : 'image1';
             
-            // Insert after the "Movies" heading
+            try {
+                const href = await getCoverImageMovie(movie);
+                movieDiv.style.cssText = getBackgroundStyle(href);
+                movieDiv.innerHTML = createTextOverlay(movie);
+            } catch (error) {
+                console.error(`Error loading cover for ${movie}:`, error);
+                movieDiv.innerHTML = `<div class="${i === 0 ? 'friends' : 'solo-dates'}">${movie}</div>`;
+            }
+            
             const moviesHeading = movieSection.querySelector('.songs');
             moviesHeading.parentNode.insertBefore(movieDiv, moviesHeading.nextSibling);
-        });
+        }
 
         // Update "More movies" section
         const moreMovies = movies.slice(3);
         const moreSection = movieSection.querySelector('.more-tv-shows-parent');
         if (moreSection) {
-            // Clear existing items except the heading
             const heading = moreSection.querySelector('.more-tv-shows');
             moreSection.innerHTML = '';
             moreSection.appendChild(heading);
 
-            // Add remaining movies
             moreMovies.forEach(movie => {
                 const movieDiv = document.createElement('div');
                 movieDiv.className = 'thats-so-true-gracie-abrams-wrapper';
@@ -246,34 +329,10 @@
         }
     }
 
-    // Add this to handle genre tags based on selected content
-    function updateGenreTags(tvShows, movies) {
-        // This is a simple example - you might want to implement more sophisticated
-        // genre detection based on your data
-        const genreSection = document.querySelector('.frame-parent');
-        if (!genreSection) return;
-
-        // Clear existing genres
-        genreSection.innerHTML = '';
-
-        // Add some example genres (you should implement proper genre detection)
-        const genres = new Set(['Drama', 'Comedy', 'Action']);
-        
-        genres.forEach(genre => {
-            const genreDiv = document.createElement('div');
-            genreDiv.className = 'science-fiction-wrapper';
-            genreDiv.innerHTML = `<div class="science-fiction">${genre}</div>`;
-            genreSection.appendChild(genreDiv);
-        });
-    }
-
-    // Initial load of selections
+    // Load initial selections
     loadSelections();
 
-    // Optional: Add a periodic check for updates if you want to support real-time updates
-    setInterval(loadSelections, 5000);
-});
-
-    </script>
+    // Optional: Add a periodic check for updates
+});    </script>
 </body>
 </html>

@@ -161,15 +161,6 @@
 	background-repeat: no-repeat;
 	background-position: top;
 }
-.cobra-kai {
-	position: absolute;
-	top: 24px;
-	left: 24px;
-	letter-spacing: -0.03em;
-	line-height: 35px;
-	display: inline-block;
-	width: 78px;
-}
 .image1 {
 	width: 130px;
 	position: relative;
@@ -181,16 +172,17 @@
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: top;
+	border: white;
 }
-.queen-of-the {
-	position: absolute;
-	top: calc(50% - 52px);
-	left: 24px;
-	letter-spacing: -0.03em;
-	line-height: 35px;
-	display: inline-block;
-	width: 78px;
+
+.image1-wrapper{
+	display: flex;                  /* Use flexbox layout */
+    justify-content: space-between; /* Space items evenly */
+    align-items: center;            /* Center items vertically */
+    margin: 10px 0;                /* Add some vertical spacing if needed */
+
 }
+
 .more-tv-shows {
 	align-self: stretch;
 	position: relative;
@@ -254,6 +246,7 @@
 	align-content: flex-start;
 	gap: 29px 31px;
 	color: #f5f4f0;
+	
 }
 .songs {
 	position: relative;
@@ -380,6 +373,16 @@
 	color: white;
 }
 
-a{
-	text-decoration: none;
+
+.text-truncate {
+    display: -webkit-box; /* Use a flexbox layout */
+    -webkit-box-orient: vertical; /* Orient the box vertically */
+    overflow: hidden; /* Hide overflow text */
+    -webkit-line-clamp: 3; /* Limit to 3 lines */
+    text-overflow: ellipsis; /* Show ellipsis at the end */
+    line-height: 1.2em; /* Set line height */
+    max-height: 3.6em; /* 3 lines * line height */
+    color: white; /* Adjust the color as needed */
 }
+
+
