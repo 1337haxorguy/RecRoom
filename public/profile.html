@@ -58,15 +58,12 @@
       			<div class="image">
         				<div class="friends">Friends</div>
       			</div>
-                <div class="image1-wrapper">
                     <div class="image1">
-                        <div class="cobra-kai">Cobra Kai</div>
-                </div>
-                <div class="image1">
-                        <div class="queen-of-the">Queen of the South</div>
-                </div>
-
-                </div>
+                            <div class="queen-of-the">Cobra Kai</div>
+                    </div>
+                    <div class="image1">
+                            <div class="queen-of-the">Queen of the South</div>
+                    </div>
       			<div class="more-tv-shows-parent">
         				<div class="more-tv-shows">More TV shows</div>
         				<div class="thats-so-true-gracie-abrams-wrapper">
@@ -121,17 +118,20 @@
     		</div>
     		<div class="movies-parent">
       			<div class="songs">Movies</div>
+                  <div class="image">
+                    <div class="friends">La La Land</div>
+              </div >
 
+                
                 <div class="image1">
-        				<div class="solo-dates">John Wick</div>
+                    <img class="image1" alt="" src="./assets/7a4e5ba71800c7087f50bb63ce04e167.png">
+                    <div class="queen-of-the">John Wick</div>
       			</div>
                 <div>
                 <div class="image1">
-        				<div class="apt">Tangled</div>
+                        <img class="image1" alt="" src="./assets/7a4e5ba71800c7087f50bb63ce04e167.png">
+        				<div class="queen-of-the">Tangled</div>
                 </div>
-                <div class="image">
-                    <div class="friends">La La Land</div>
-              </div >
 
                 </div>
       			<div class="more-tv-shows-parent">
@@ -153,7 +153,7 @@
         				</div>
       			</div>
     		</div class="frame-group">
-    		<img class="iphone-13-mini-1-item" alt="" src="./assets/logo.png">
+    		<img class="iphone-13-mini-1-item" alt="" src="./assets/06ccc6f43c54abc807975344ff5211c9.png">
     		
     		<div class="my-rec-room">My Rec Room</div>
     		<div class="created-for-hackru-container">
@@ -163,176 +163,121 @@
   	</div>
   	
   	<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Function to get background style with cover image
-    function getBackgroundStyle(href) {
-        console.log(`Applying background with href: ${href}`);
-
-    return `
-        background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${href});
-        background-size: cover;
-        background-position: center;
-        min-height: 150px;
-        position: relative;
-        border-radius: 8px;
-        overflow: hidden;
-
-    `;
-}
 
 
-    // Function to create overlay div for text
-    function createTextOverlay(text, href) {
-    const overlay = `
-        <div class="friends text-truncate" style="
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            z-index: 2;
-        ">${text}</div>
-        <div style="
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(transparent 50%, rgba(0,0,0,0.7));
-            z-index: 1;
-        "></div>
-    `;
-    return overlay;
-}
-
-    async function getCoverImageTV(show) {
-        const response = await fetch('/api/getCoverImageTV', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ input: show })
-        });
-        const data = await response.json();
-        return data; // Assuming the first element contains the image URL
-    }
-
-    async function getCoverImageMovie(movie) {
-        const response = await fetch('/api/getCoverImageMovie', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ input: movie })
-        });
-        const data = await response.json();
-        return data; // Assuming the first element contains the image URL
-    }
-
-
+document.addEventListener('DOMContentLoaded', function () {
     // Function to load selections from localStorage
     async function loadSelections() {
         const tvShows = JSON.parse(localStorage.getItem('selected_tv') || '[]');
         const movies = JSON.parse(localStorage.getItem('selected_movies') || '[]');
         
-        await updateTVShowsSection(tvShows);
-        await updateMoviesSection(movies);
+        await updateSection('.tv-shows-parent', tvShows, getCoverImageTV, "TV shows");
+        await updateSection('.movies-parent', movies, getCoverImageMovie, "Movies");
     }
 
-    // Function to update TV Shows section
-    async function updateTVShowsSection(shows) {
-        const tvSection = document.querySelector('.tv-shows-parent');
-        if (!tvSection) return;
-
-        // Clear existing featured shows
-        const existingShows = tvSection.querySelectorAll('.image, .image1');
-        existingShows.forEach(show => show.remove());
-
-        // Update featured shows (up to first 3)
-        const featuredShows = shows.slice(0, 3);
-        for (let i = 0; i < featuredShows.length; i++) {
-            const show = featuredShows[i];
-            const showDiv = document.createElement('div');
-            showDiv.className = i === 0 ? 'image' : 'image1';
-            
-            try {
-                const href = await getCoverImageTV(show);
-                showDiv.style.cssText = getBackgroundStyle(href);
-                showDiv.innerHTML = createTextOverlay(show);
-            } catch (error) {
-                console.error(`Error loading cover for ${show}:`, error);
-                showDiv.innerHTML = `<div class="friends">${show}</div>`;
-            }
-            
-            const tvShowsHeading = tvSection.querySelector('.tv-shows');
-            tvShowsHeading.parentNode.insertBefore(showDiv, tvShowsHeading.nextSibling);
-        }
-
-        // Update "More TV shows" section
-        const moreTVShows = shows.slice(3);
-        const moreSection = tvSection.querySelector('.more-tv-shows-parent');
-        if (moreSection) {
-            const heading = moreSection.querySelector('.more-tv-shows');
-            moreSection.innerHTML = '';
-            moreSection.appendChild(heading);
-
-            moreTVShows.forEach(show => {
-                const showDiv = document.createElement('div');
-                showDiv.className = 'thats-so-true-gracie-abrams-wrapper';
-                showDiv.innerHTML = `<div class="thats-so-true">${show}</div>`;
-                moreSection.appendChild(showDiv);
-            });
-        }
+    // Function to get background style with cover image
+    function getBackgroundStyle(href) {
+        return `
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${href});
+            background-size: cover;
+            background-position: center;
+            min-height: 150px;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+        `;
     }
 
-    // Function to update Movies section
-    async function updateMoviesSection(movies) {
-        const movieSection = document.querySelector('.movies-parent');
-        if (!movieSection) return;
+    // Function to get cover image from API
+    async function getCoverImageTV(show) {
+        const response = await fetch('/api/getCoverImageTV', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ input: show })
+        });
+        const data = await response.json();
+        return data;
+    }
 
-        // Clear existing featured movies
-        const existingMovies = movieSection.querySelectorAll('.image, .image1');
-        existingMovies.forEach(movie => movie.remove());
+    async function getCoverImageMovie(movie) {
+        const response = await fetch('/api/getCoverImageMovie', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ input: movie })
+        });
+        const data = await response.json();
+        return data;
+    }
 
-        // Update featured movies (up to first 3)
-        const featuredMovies = movies.slice(0, 3);
-        for (let i = 0; i < featuredMovies.length; i++) {
-            const movie = featuredMovies[i];
-            const movieDiv = document.createElement('div');
-            movieDiv.className = i === 0 ? 'image' : 'image1';
-            
-            try {
-                const href = await getCoverImageMovie(movie);
-                movieDiv.style.cssText = getBackgroundStyle(href);
-                movieDiv.innerHTML = createTextOverlay(movie);
-            } catch (error) {
-                console.error(`Error loading cover for ${movie}:`, error);
-                movieDiv.innerHTML = `<div class="${i === 0 ? 'friends' : 'solo-dates'}">${movie}</div>`;
-            }
-            
-            const moviesHeading = movieSection.querySelector('.songs');
-            moviesHeading.parentNode.insertBefore(movieDiv, moviesHeading.nextSibling);
-        }
+    // Function to update section with fetched data and add to "More" if necessary
+    async function updateSection(parentSelector, items, fetchCoverImage, itemType) {
+        const parent = document.querySelector(parentSelector);
+        if (!parent) return;
 
-        // Update "More movies" section
-        const moreMovies = movies.slice(3);
-        const moreSection = movieSection.querySelector('.more-tv-shows-parent');
+        // Clear existing items
+        const existingItems = parent.querySelectorAll('.image, .image1');
+        existingItems.forEach(item => item.remove());
+
+        // Add up to 3 items in main section, rest go to "More" section
+        const featuredItems = items.slice(0, 3);
+        const moreItems = items.slice(3);
+
+        const moreSection = parent.querySelector('.more-tv-shows-parent');
         if (moreSection) {
             const heading = moreSection.querySelector('.more-tv-shows');
-            moreSection.innerHTML = '';
+            moreSection.innerHTML = ''; // Clear existing content
             moreSection.appendChild(heading);
 
-            moreMovies.forEach(movie => {
-                const movieDiv = document.createElement('div');
-                movieDiv.className = 'thats-so-true-gracie-abrams-wrapper';
-                movieDiv.innerHTML = `<div class="thats-so-true">${movie}</div>`;
-                moreSection.appendChild(movieDiv);
+            moreItems.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'thats-so-true-gracie-abrams-wrapper';
+                itemDiv.innerHTML = `<div class="thats-so-true">${item}</div>`;
+                moreSection.appendChild(itemDiv);
             });
         }
+
+
+        // Add featured items
+        for (let i = 0; i < featuredItems.length; i++) {
+            const item = featuredItems[i];
+            const itemDiv = document.createElement('div');
+            itemDiv.className = i === 0 ? 'image' : 'image1';
+
+            try {
+                const href = await fetchCoverImage(item);
+                itemDiv.style.cssText = getBackgroundStyle(href);
+                itemDiv.innerHTML = `<div class="${i === 0 ? 'friends' : 'queen-of-the text-truncate'}">${item}</div>`;
+            } catch (error) {
+                console.error(`Error loading cover for ${item}:`, error);
+                itemDiv.innerHTML = `<div class="${i === 0 ? 'friends' : 'queen-of-the text-truncate'}">${item}</div>`;
+            }
+            parent.appendChild(itemDiv);
+        }
+
+        // Update "More" section with additional items
     }
 
     // Load initial selections
     loadSelections();
+});
 
-    // Optional: Add a periodic check for updates
-});    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
 </body>
 </html>

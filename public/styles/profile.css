@@ -146,8 +146,9 @@
 .friends {
 	position: absolute;
 	top: 24px;
-	left: 24px;
+	left: 10px;
 	letter-spacing: -0.03em;
+	width: 240px;
 }
 .image {
 	width: 284px;
@@ -303,7 +304,7 @@
 }
 .songs-parent {
 	position: absolute;
-	top: 1779px;
+	top: 1600px;
 	left: calc(50% - 143.5px);
 	width: 284px;
 	display: flex;
@@ -317,7 +318,7 @@
 }
 .movies-parent {
 	position: absolute;
-	top: 1151px;
+	top: 1050px;
 	left: calc(50% - 143.5px);
 	width: 284px;
 	display: flex;
@@ -330,11 +331,11 @@
 	color: #f5f4f0;
 }
 .iphone-13-mini-1-item {
-	position: absolute;
-	top: 0px;
-	left: calc(50% - 187.5px);
-	width: 375px;
-	height: 167px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	  width: 179px;
+	height: 155px;
 }
 .my-rec-room {
 	position: absolute;
@@ -373,16 +374,33 @@
 	color: white;
 }
 
-
-.text-truncate {
-    display: -webkit-box; /* Use a flexbox layout */
-    -webkit-box-orient: vertical; /* Orient the box vertically */
-    overflow: hidden; /* Hide overflow text */
-    -webkit-line-clamp: 3; /* Limit to 3 lines */
-    text-overflow: ellipsis; /* Show ellipsis at the end */
-    line-height: 1.2em; /* Set line height */
-    max-height: 3.6em; /* 3 lines * line height */
-    color: white; /* Adjust the color as needed */
+.queen-of-the {
+    position: absolute;
+    top: calc(50% - 52px);
+    left: 10px;
+    letter-spacing: -0.03em;
+    line-height: 35px;
+    display: inline-block;
+    width: 120px;
 }
 
+
+.text-truncate {
+    display: -webkit-box;             /* Enables the flex container model */
+    -webkit-line-clamp: 3;            /* Limits text to 3 lines */
+    -webkit-box-orient: vertical;     /* Makes the box orient vertically */
+    text-overflow: ellipsis;          /* Adds ellipses for overflowed text */
+	overflow: hidden;
+}
+
+.blur {
+         background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${href});
+         background-size: cover;
+         background-position: center;
+         min-height: 150px;
+         position: relative;
+         border-radius: 8px;
+         overflow: hidden;
+
+}
 
