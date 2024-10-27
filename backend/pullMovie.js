@@ -27,7 +27,7 @@ function pullMovie(input) {
             }
 
             // Extract only the titles of the first 2 movies
-            const movieNames = json.results.slice(0, 2).map(movie => movie.title);
+            const movieNames = json.results.slice(0, 6).map(movie => movie.title);
 
             console.log(movieNames); // Log for debugging
             return movieNames; // Return an array of movie names
