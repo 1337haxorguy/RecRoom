@@ -26,7 +26,7 @@ function pullShow(input) {
             }
 
             // Extract only the titles of the first 2 shows
-            const showNames = json.results.slice(0, 2).map(show => show.name);
+            const showNames = json.results.slice(0, 6).map(show => show.name);
 
             console.log(showNames); // Log for debugging
             return showNames; // Return an array of show names
