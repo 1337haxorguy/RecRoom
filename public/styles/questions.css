@@ -265,3 +265,11 @@
     font-size: 23.06px;
     color: #fff;
 }
+
+.add-your-recs-link {
+    position: absolute;
+    top: 2350px;
+    left: 50%;                /* Center horizontally */
+    width: 400px;              /* Set width */
+    transform: translateX(-50%); /* Shift back by 50% of its width */
+}
