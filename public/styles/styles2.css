@@ -94,3 +94,7 @@ object-fit: cover;
     font-family: 'PP Neue Montreal';
 }
 
+body{
+    background-color: #f5f4f0;
+}
+

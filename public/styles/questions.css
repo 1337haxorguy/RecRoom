@@ -242,3 +242,26 @@
     font-family: 'Instrument Serif';
 }
 
+.add-your-recs {
+    position: relative;
+    letter-spacing: -0.03em;
+    line-height: 27.1px;
+    font-family: 'Inter', sans-serif;
+}
+
+.add-your-recs-parent {
+    position: absolute;
+    top: 325px;
+    left: calc(50% - 121.5px);
+    border-radius: 100px;
+    background-color: #000;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 11px 34px;
+    gap: 23px;
+    font-size: 23.06px;
+    color: #fff;
+}

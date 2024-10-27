@@ -191,15 +191,14 @@
         				<div class="selected-la-la-container">Selected:
           					<span class="span"> </span>
         				</div>
-      			</div>
+					</div>
+
     		</div>
   	</div>
   	
   	
   	
       <script>
-    
-        
 document.addEventListener('DOMContentLoaded', function() {
     // Mock backend data for each category
     const mockData = {
@@ -217,17 +216,19 @@ document.addEventListener('DOMContentLoaded', function() {
         ]
     };
 
-
+    // Create a map to store selected items for each category
+    const categorySelections = new Map();
 
     // Initialize each recommendation section
     const sections = document.querySelectorAll('.image-parent');
     sections.forEach((section, index) => {
         const category = index === 0 ? 'tv' : index === 1 ? 'movies' : 'songs';
+        categorySelections.set(category, new Set()); // Initialize empty set for each category
+        
         const searchInput = section.querySelector('.search');
         const searchButton = section.querySelector('.misearch-wrapper');
         const frameParent1 = section.querySelector('.frame-parent1');
         const selectedContainer = section.querySelector('.selected-la-la-container');
-        let selectedItems = [];
 
         // Function to create a recommendation item
         function createRecommendationItem(text) {
@@ -239,34 +240,104 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
         }
 
-        // Function to simulate backend search for each category
-        function searchBackend(searchTerm) {
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    const results = mockData[category].filter(item => 
-                        item.toLowerCase().includes(searchTerm.toLowerCase())
-                    );
-                    resolve(results);
-                }, 300);
-            });
+        // Function to create a selected item element
+        function createSelectedItem(text) {
+            const span = document.createElement('span');
+            span.className = 'selected-item';
+            span.textContent = text;
+            span.style.backgroundColor = '#f0f0f0';
+            span.style.padding = '2px 8px';
+            span.style.margin = '0 4px';
+            span.style.borderRadius = '4px';
+            span.style.cursor = 'pointer';
+            span.title = 'Click to remove';
+            return span;
+        }
+
+        // Function to update selected items display
+        function updateSelectedDisplay() {
+            const selectedItems = categorySelections.get(category);
+            const textSpan = selectedContainer.querySelector('.span') || selectedContainer;
+            textSpan.innerHTML = ''; // Clear existing content
             
+            selectedItems.forEach(item => {
+                const itemElement = createSelectedItem(item);
+                textSpan.appendChild(itemElement);
+                
+                // Add click handler for removal
+                itemElement.addEventListener('click', () => {
+                    selectedItems.delete(item);
+                    updateSelectedDisplay();
+                });
+            });
+        }
+
+        async function pullShow(input) {
+            try {
+                const response = await fetch('/api/pullShow', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ input })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const showNames = await response.json();
+                return showNames;
+            } catch (error) {
+                console.error('Error fetching show data:', error);
+            }
+        }
+
+        async function pullMovie(input) {
+            try {
+                const response = await fetch('/api/pullMovie', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ input })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const showNames = await response.json();
+                return showNames;
+            } catch (error) {
+                console.error('Error fetching movie data:', error);
+            }
         }
 
         // Update results for this section
         async function updateResults(searchTerm) {
             try {
-                const results = await searchBackend(searchTerm);
-                
+                let results;
+                if (category === 'tv') {
+                    results = await pullShow(searchTerm);
+                } else if (category === 'movies') {
+                    results = await pullMovie(searchTerm);
+                } else {
+                    results = mockData.songs.filter(song => 
+                        song.toLowerCase().includes(searchTerm.toLowerCase())
+                    );
+                }
+
                 // Clear existing items except the "Other:" option
                 const otherOption = frameParent1.querySelector('.unchecked-group');
                 frameParent1.innerHTML = '';
-                
+
                 // Add search results
                 results.forEach(result => {
                     const itemHtml = createRecommendationItem(result);
                     frameParent1.insertAdjacentHTML('beforeend', itemHtml);
                 });
-                
+
                 // Re-add the "Other:" option
                 if (otherOption) {
                     frameParent1.appendChild(otherOption);
@@ -274,7 +345,6 @@ document.addEventListener('DOMContentLoaded', function() {
             } catch (error) {
                 console.error('Error fetching results:', error);
             }
-
         }
 
         // Handle search button click
@@ -296,21 +366,46 @@ document.addEventListener('DOMContentLoaded', function() {
             const recommendationItem = e.target.closest('.unchecked-parent');
             if (recommendationItem) {
                 const text = recommendationItem.querySelector('.unchecked').textContent;
-                if (selectedItems.length < 8) {
-                    selectedItems.push(text);
-                    // Update selected items display for this section
-                    selectedContainer.textContent = `Selected: ${selectedItems.join(', ')}`;
+                const selectedItems = categorySelections.get(category);
+                
+                if (selectedItems.size < 8) {
+                    selectedItems.add(text);
+                    updateSelectedDisplay();
+                    
+                    // Store selections in localStorage
+                    localStorage.setItem(
+                        `selected_${category}`, 
+                        JSON.stringify([...selectedItems])
+                    );
                 } else {
                     alert('Maximum 8 items can be selected');
                 }
             }
         });
 
+        // Load saved selections from localStorage on page load
+        const savedSelections = localStorage.getItem(`selected_${category}`);
+        if (savedSelections) {
+            const items = JSON.parse(savedSelections);
+            items.forEach(item => categorySelections.get(category).add(item));
+            updateSelectedDisplay();
+        }
+
         // Initialize with empty search
         updateResults('');
     });
 });
     </script>
+
+	<div class = "selecting-recs"> 
+		<a href="/profile" class="add-your-recs-link">
+			<div class="add-your-recs-parent">
+				<div class="add-your-recs">Continue To Profile</div>
+				<img class="riarrow-right-line-icon" alt="" src="./assets/ri_arrow-right-line.svg">
+			</div>
+		   </a>
+
+	</div>
 
 </body>
 </html>
