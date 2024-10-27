@@ -1,0 +1,244 @@
+.selecting-recs-child {
+    position: absolute;
+    top: 29px;
+    left: calc(50% - 30.5px);
+    width: 61px;
+    height: 20.2px;
+    object-fit: cover;
+}
+.frame-child {
+    position: absolute;
+    top: 0px;
+    left: 52px;
+    width: 212px;
+    height: 212px;
+    object-fit: cover;
+}
+.add-your-recs-container {
+    position: absolute;
+    top: 225.16px;
+    left: 0px;
+    letter-spacing: -0.03em;
+    line-height: 50px;
+    display: inline-block;
+    width: 315px;
+}
+.shareable-site {
+    font-weight: 600;
+}
+.enter-up-to-container {
+    position: absolute;
+    top: 298px;
+    left: 48px;
+    font-size: 14px;
+    letter-spacing: -0.03em;
+    line-height: 19px;
+    display: inline-block;
+    width: 219px;
+    font-family: Inter;
+}
+.frame-parent {
+    position: absolute;
+    top: 150px;
+    left: calc(50% - 157.5px);
+    width: 315px;
+    height: 355px;
+}
+.image-icon {
+    width: 273px;
+    position: relative;
+    border-radius: 22.29px;
+    height: 228px;
+    overflow: hidden;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+.enter-your-tv {
+    position: absolute;
+    top: calc(50% - 47px);
+    left: calc(50% - 142.5px);
+    letter-spacing: -0.03em;
+    line-height: 47px;
+    display: inline-block;
+    width: 285px;
+}
+.enter-your-tv-show-recommendat-wrapper {
+    align-self: stretch;
+    position: relative;
+    height: 94px;
+    font-family: 'Instrument Serif';
+}
+.search {
+    position: relative;
+    line-height: 25.64px;
+    border: none;
+}
+.search-wrapper {
+    position: absolute;
+    top: 0px;
+    left: calc(50% - 145.5px);
+    border-radius: 100px;
+    background-color: #fff;
+    width: 291px;
+    height: 48px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 6px 27px;
+    box-sizing: border-box;
+}
+.misearch-icon {
+    width: 15.2px;
+    position: relative;
+    height: 15.2px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.misearch-wrapper {
+    position: absolute;
+    top: 9px;
+    left: 232px;
+    border-radius: 89.39px;
+    background-color: #84af65;
+    width: 46px;
+    height: 30px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0.9px 17.9px;
+    box-sizing: border-box;
+}
+.frame-div {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 291px;
+    height: 48px;
+}
+.unchecked {
+    position: relative;
+    line-height: 37.86px;
+}
+.frame-item {
+    width: 14px;
+    position: relative;
+    height: 14px;
+}
+.unchecked-parent {
+    width: 242.8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 15.9px 0px 14px;
+    box-sizing: border-box;
+}
+.unchecked1 {
+    position: absolute;
+    top: 0px;
+    left: 14.01px;
+    line-height: 37.86px;
+}
+.frame-inner {
+    position: absolute;
+    top: 25.08px;
+    left: 67.42px;
+    border-top: 1px solid #000;
+    box-sizing: border-box;
+    width: 135px;
+    height: 1px;
+}
+.frame-child1 {
+    position: absolute;
+    top: 11.06px;
+    left: 212.49px;
+    border-radius: 0.93px;
+    border: 1.4px solid #000;
+    box-sizing: border-box;
+    width: 15.9px;
+    height: 15.9px;
+    overflow: hidden;
+}
+.unchecked-group {
+    width: 242.8px;
+    position: relative;
+    height: 38px;
+}
+.frame-parent1 {
+    position: absolute;
+    top: 60px;
+    left: 0px;
+    border-radius: 9.34px;
+    background-color: #fff;
+    width: 291px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 13.1px 0px;
+    box-sizing: border-box;
+    gap: 9.3px;
+    font-size: 15px;
+    color: #000;
+}
+.frame-container {
+    width: 291px;
+    position: relative;
+    height: 186.5px;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.39);
+}
+.span {
+    text-decoration: underline;
+}
+.selected-la-la-container {
+    align-self: stretch;
+    position: relative;
+    font-size: 15px;
+    line-height: 37.86px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.7);
+    display: inline-block;
+    height: 91px;
+    flex-shrink: 0;
+}
+
+.image-parent {
+    width: 291px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 27px;
+}
+.frame-group {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 600px;
+      display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 57px;
+    text-align: left;
+    font-size: 40px;
+    font-family: Inter;
+}
+
+.selecting-recs {
+    width: 100%;
+    position: relative;
+    background-color: #f5f4f0;
+    height: 2882px;
+    overflow: hidden;
+    text-align: center;
+    font-size: 50px;
+    color: #000;
+    font-family: 'Instrument Serif';
+}
+

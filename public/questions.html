@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+  	<meta charset="utf-8">
+  	<meta name="viewport" content="initial-scale=1, width=device-width">
+  	
+  	<link rel="stylesheet"  href="./styles/questions.css" />
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument Serif:ital,wght@0,400;1,400&display=swap" />
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" />
+  	
+  	
+      <style>
+        /* Only adding new styles for frame-parent1, keeping your existing CSS */
+        .frame-parent1 {
+            position: absolute;
+            top: 60px;
+            left: 0px;
+            border-radius: 9.34px;
+            background-color: #fff;
+            width: 291px;
+            max-height: 100px;
+            overflow-y: scroll !important;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 13.1px 0px;
+            box-sizing: border-box;
+            gap: 9.3px;
+            font-size: 15px;
+            color: #000;
+        }
+
+        .frame-parent1.scrollable {
+            max-height: 100px; /* or whatever maximum height you want */
+        }
+
+
+
+        /* Custom scrollbar styling */
+        .frame-parent1::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .frame-parent1::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .frame-parent1::-webkit-scrollbar-thumb {
+            background: #84af65;
+            border-radius: 3px;
+        }
+
+        /* Keep your existing classes for recommendation items */
+        .unchecked-parent {
+            width: 242.8px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0px 15.9px 0px 14px;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+
+        .unchecked-parent:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+
+</head>
+<body>
+  	
+  	<div class="selecting-recs">
+    		<img class="selecting-recs-child" alt="" src="./assets/1640651fdbb8a582c90d066d62b70266.png">
+    		
+    		<div class="frame-parent">
+      			<img class="frame-child" alt="" src="./assets/TV.png">
+      			
+      			<div class="add-your-recs-container">
+        				<span>Add your </span>
+        				<i>recs</i>
+      			</div>
+      			<div class="enter-up-to-container">
+        				<span>Enter up to 8 recommendations per category, and watch it turn into your own </span>
+        				<span class="shareable-site">shareable site!</span>
+      			</div>
+    		</div>
+    		<div class="frame-group">
+      			<div class="image-parent">
+        				<img class="image-icon" alt="" src="./assets/7a4e5ba71800c7087f50bb63ce04e167.png">
+        				
+        				<div class="enter-your-tv-show-recommendat-wrapper">
+          					<div class="enter-your-tv">Enter your TV show recommendations </div>
+        				</div>
+        				<div class="frame-container">
+          					<div class="frame-div">
+            						<div class="search-wrapper">
+              							<input type="text" placeholder="Search..." class="search"></input>
+            						</div>
+            						<button class="misearch-wrapper">
+                                        <img class="misearch-icon" alt="" src="./assets/mi_search.svg">
+                                        
+                                  </button>
+                            </div>
+          					<div class="frame-parent1" id="tv">
+            						<div class="unchecked-parent">
+              							<div class="unchecked">Stranger Things</div>
+              							<img class="frame-item" alt="" src="./assets/Frame 39.svg">
+              							
+            						</div>
+            						<div class="unchecked-group">
+              							<div class="unchecked1">Other:</div>
+              							<div class="frame-inner">
+              							</div>
+              							<div class="frame-child1">
+              							</div>
+            						</div>
+          					</div>
+        				</div>
+        				<div class="selected-la-la-container">Selected:
+          					<span class="span"> </span>
+        				</div>
+      			</div>
+      			<div class="image-parent">
+        				<img class="image-icon" alt="" src="./assets/LALALAND.png">
+        				
+        				<div class="enter-your-tv-show-recommendat-wrapper">
+          					<div class="enter-your-tv">Enter your movie recommendations </div>
+        				</div>
+        				<div class="frame-container">
+          					<div class="frame-div">
+            						<div class="search-wrapper">
+                                        <input type="text" placeholder="Search..." class="search"></input>
+            						</div>
+            						<button class="misearch-wrapper">
+                                        <img class="misearch-icon" alt="" src="./assets/mi_search.svg">
+                                        
+                                  </button>
+                            </div>
+          					<div class="frame-parent1" id="movie">
+            						<div class="unchecked-parent">
+              							<div class="unchecked">Moonlight</div>
+              							<img class="frame-item" alt="" src="Frame 40.svg">
+              							
+            						</div>
+            						<div class="unchecked-group">
+              							<div class="unchecked1">Other:</div>
+              							<div class="frame-inner">
+              							</div>
+              							<div class="frame-child1">
+              							</div>
+            						</div>
+          					</div>
+        				</div>
+        				<div class="selected-la-la-container">Selected:
+          					<span class="span"> </span>
+        				</div>
+      			</div>
+      			<div class="image-parent">
+        				<img class="image-icon" alt="" src="./assets/e0f51f03adb1c91057ef5c7703cbcfa8.png">
+        				
+        				<div class="enter-your-tv-show-recommendat-wrapper">
+          					<div class="enter-your-tv">Enter your song recommendations </div>
+        				</div>
+        				<div class="frame-container">
+          					<div class="frame-div">
+            						<div class="search-wrapper">
+                                        <input type="text" placeholder="Search..." class="search"></input>
+            						</div>
+            						<button class="misearch-wrapper">
+              							<img class="misearch-icon" alt="" src="./assets/mi_search.svg">
+              							
+                                    </button>
+          					</div>
+          					<div class="frame-parent1">
+            						<div class="unchecked-parent" id="song">
+              							<div class="unchecked">Moonlight</div>
+              							<img class="frame-item" alt="" src="Frame 40.svg">
+              							
+            						</div>
+            						<div class="unchecked-group">
+              							<div class="unchecked1">Other:</div>
+              							<div class="frame-inner">
+              							</div>
+              							<div class="frame-child1">
+              							</div>
+            						</div>
+          					</div>
+        				</div>
+        				<div class="selected-la-la-container">Selected:
+          					<span class="span"> </span>
+        				</div>
+      			</div>
+    		</div>
+  	</div>
+  	
+  	
+  	
+      <script>
+    
+        
+document.addEventListener('DOMContentLoaded', function() {
+    // Mock backend data for each category
+    const mockData = {
+        tv: [
+            'Stranger Things', 'Breaking Bad', 'The Crown', 'Bridgerton',
+            'The Mandalorian', 'Game of Thrones', 'The Office', 'Friends'
+        ],
+        movies: [
+            'La La Land', 'Moonlight', 'The Godfather', 'Pulp Fiction',
+            'Inception', 'The Dark Knight', 'Parasite', 'The Matrix'
+        ],
+        songs: [
+            'Bohemian Rhapsody', 'Hey Jude', 'Imagine', 'Billie Jean',
+            'Like a Rolling Stone', 'Purple Rain', 'Yesterday', 'Wonderwall'
+        ]
+    };
+
+
+
+    // Initialize each recommendation section
+    const sections = document.querySelectorAll('.image-parent');
+    sections.forEach((section, index) => {
+        const category = index === 0 ? 'tv' : index === 1 ? 'movies' : 'songs';
+        const searchInput = section.querySelector('.search');
+        const searchButton = section.querySelector('.misearch-wrapper');
+        const frameParent1 = section.querySelector('.frame-parent1');
+        const selectedContainer = section.querySelector('.selected-la-la-container');
+        let selectedItems = [];
+
+        // Function to create a recommendation item
+        function createRecommendationItem(text) {
+            return `
+                <div class="unchecked-parent">
+                    <div class="unchecked">${text}</div>
+                    <img class="frame-item" alt="" src="./assets/Frame 39.svg">
+                </div>
+            `;
+        }
+
+        // Function to simulate backend search for each category
+        function searchBackend(searchTerm) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    const results = mockData[category].filter(item => 
+                        item.toLowerCase().includes(searchTerm.toLowerCase())
+                    );
+                    resolve(results);
+                }, 300);
+            });
+            
+        }
+
+        // Update results for this section
+        async function updateResults(searchTerm) {
+            try {
+                const results = await searchBackend(searchTerm);
+                
+                // Clear existing items except the "Other:" option
+                const otherOption = frameParent1.querySelector('.unchecked-group');
+                frameParent1.innerHTML = '';
+                
+                // Add search results
+                results.forEach(result => {
+                    const itemHtml = createRecommendationItem(result);
+                    frameParent1.insertAdjacentHTML('beforeend', itemHtml);
+                });
+                
+                // Re-add the "Other:" option
+                if (otherOption) {
+                    frameParent1.appendChild(otherOption);
+                }
+            } catch (error) {
+                console.error('Error fetching results:', error);
+            }
+
+        }
+
+        // Handle search button click
+        searchButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            updateResults(searchInput.value);
+        });
+
+        // Handle Enter key in search input
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                updateResults(searchInput.value);
+            }
+        });
+
+        // Handle clicking on recommendations
+        frameParent1.addEventListener('click', (e) => {
+            const recommendationItem = e.target.closest('.unchecked-parent');
+            if (recommendationItem) {
+                const text = recommendationItem.querySelector('.unchecked').textContent;
+                if (selectedItems.length < 8) {
+                    selectedItems.push(text);
+                    // Update selected items display for this section
+                    selectedContainer.textContent = `Selected: ${selectedItems.join(', ')}`;
+                } else {
+                    alert('Maximum 8 items can be selected');
+                }
+            }
+        });
+
+        // Initialize with empty search
+        updateResults('');
+    });
+});
+    </script>
+
+</body>
+</html>

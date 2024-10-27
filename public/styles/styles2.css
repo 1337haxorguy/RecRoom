@@ -1,0 +1,96 @@
+.welcome-to-the {
+    display: block;
+    margin-top: 46px;
+    margin-left: auto;
+    margin-right: auto;
+    letter-spacing: -0.03em;
+    line-height: 37.3px;
+    text-align: center;
+    font: optional;
+    font-family: 'Inter', sans-serif;
+    font-size: 25px;
+}
+
+.aldkf-1-icon{
+    width: 58px;
+    display: block;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+
+overflow: hidden;
+height: 58px;
+object-fit: cover;
+
+}
+.rec-room {
+    position: absolute;
+    top: 179px;
+    left: calc(50% - 146.5px);
+    font-size: 92.77px;
+    letter-spacing: -0.03em;
+    line-height: 109px;
+    font-family: 'Instrument Serif';
+}
+.add-your-recs {
+    position: relative;
+    letter-spacing: -0.03em;
+    line-height: 27.1px;
+    font-family: 'Inter', sans-serif;
+}
+.riarrow-right-line-icon {
+    width: 24px;
+    position: relative;
+    height: 24px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.add-your-recs-parent {
+    position: absolute;
+    top: 325px;
+    left: calc(50% - 121.5px);
+    border-radius: 100px;
+    background-color: #000;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 11px 34px;
+    gap: 23px;
+    font-size: 23.06px;
+    color: #fff;
+}
+.intro-screen-child {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 250px;
+      border-radius: 15px;
+    width: 555px;
+    height: 601px;
+    overflow: hidden;
+    object-fit: contain;
+}
+.intro-screen-item {
+    position: absolute;
+    top: 493px;
+    left: 155px;
+    border-radius: 15px;
+    width: 191.1px;
+    height: 234.3px;
+    overflow: hidden;
+    object-fit: contain;
+}
+.intro-screen {
+    width: 100%;
+    position: relative;
+    background-color: #f5f4f0;
+    height: 812px;
+    overflow: hidden;
+    text-align: left;
+    font-size: 25px;
+    color: #000;
+    font-family: 'PP Neue Montreal';
+}
+

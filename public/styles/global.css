@@ -7,3 +7,20 @@ color: black;
 font-family: 'Instrument Serif';
 text-decoration: none;
 }
+
+body{
+  background-color: #f5f4f0;
+  overflow: hidden;
+  text-align: center;
+  color: black;
+  font-family: 'Instrument Serif';
+  text-decoration: none;
+}
+
+/* Make a font family from inter-variable font*/
+@font-face {
+    font-family: 'Inter';
+    src: url('/public/assets/Instrument\ Serif\ Inter/Inter/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-display: swap;
+}
